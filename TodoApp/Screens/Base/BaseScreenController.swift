@@ -1,6 +1,6 @@
 import UIKit
 
-class BaseScreenController: UISplitViewController {
+class BaseScreenController: UIViewController {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint?
     @IBOutlet weak var viewContainer: UIView?

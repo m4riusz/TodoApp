@@ -6,9 +6,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let rootController = UITabBarController()
+        
+        let todoListRootController: TodoNavigationController = TodoNavigationController(rootViewController: TodoListController())
+        todoListRootController.tabBarItem = UITabBarItem(title: "Todo", image: nil, selectedImage: nil)
+        
+        rootController.viewControllers = [todoListRootController]
+        window?.rootViewController = rootController
+        window?.makeKeyAndVisible()
         return true
     }
 
