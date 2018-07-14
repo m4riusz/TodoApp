@@ -12,5 +12,4 @@ class TodoListConfigurator: ITodoListConfigurator {
         
         controller.todoListPresenter = todoListPresenter
     }
-    
 }
