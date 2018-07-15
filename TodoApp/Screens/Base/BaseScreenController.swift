@@ -9,9 +9,14 @@ class BaseScreenController: UIViewController {
         super.viewWillAppear(animated);
         self.title = getTitle()
         loadScreenData();
+        setButtons()
     }
     
     func loadScreenData() -> Void {
+        // override
+    }
+    
+    func setButtons() -> Void {
         // override
     }
     

@@ -18,6 +18,38 @@ class TodoListController: TodoBaseController {
         todoListPresenter.getTodos()
     }
     
+    override func setButtons() {
+        super.setButtons()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(onAddButton))
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
+    
+    @objc
+    fileprivate func onAddButton() -> Void {
+        let alertController: UIAlertController = UIAlertController(title: "Add", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Title"
+        }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Notes"
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            
+        }))
+        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
+            let title: String = alertController.textFields?.first?.text ?? "Title"
+            let description: String = alertController.textFields?.last?.text ?? ""
+            self.todoListPresenter.saveTodo(withTitle: title, withDescription: description)
+            
+        }))
+        self.navigationController?.present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 extension TodoListController: ITodoListView {
