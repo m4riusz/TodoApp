@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ITodoListView {
-    func setTodos(_ todos: [Todo])
+    func setTodos(_ todos: [Todo]) -> Void
 }
 
 class TodoListController: TodoBaseController {
@@ -27,6 +27,9 @@ class TodoListController: TodoBaseController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+        self.navigationItem.rightBarButtonItems?.forEach({ (barButton) in
+            barButton.isEnabled = !editing
+        })
     }
     
     @objc
@@ -44,7 +47,10 @@ class TodoListController: TodoBaseController {
         alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
             let title: String = alertController.textFields?.first?.text ?? "Title"
             let description: String = alertController.textFields?.last?.text ?? ""
-            self.todoListPresenter.saveTodo(withTitle: title, withDescription: description)
+            if let savedTodo: Todo = self.todoListPresenter.saveTodo(withTitle: title, withDescription: description) {
+                self.todos.insert(savedTodo, at: 0)
+                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+            }
             
         }))
         self.navigationController?.present(alertController, animated: true, completion: nil)
@@ -54,7 +60,7 @@ class TodoListController: TodoBaseController {
 
 extension TodoListController: ITodoListView {
     
-    func setTodos(_ todos: [Todo]) {
+    func setTodos(_ todos: [Todo]) -> Void{
         self.todos = todos
         self.tableView.reloadData()
     }
@@ -75,5 +81,24 @@ extension TodoListController: UITableViewDataSource {
 }
 
 extension TodoListController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let rowToMove: Todo = self.todos[sourceIndexPath.row];
+        self.todos.remove(at: sourceIndexPath.row)
+        self.todos.insert(rowToMove, at: destinationIndexPath.row)
+        self.todoListPresenter.moveTodo(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard todos.count > indexPath.row else {
+            return
+        }
+        guard editingStyle == .delete else {
+            return
+        }
+        self.todoListPresenter.removeTodo(todos[indexPath.row])
+        self.todos.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
+    }
     
 }

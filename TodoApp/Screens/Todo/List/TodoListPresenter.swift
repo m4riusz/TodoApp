@@ -3,7 +3,9 @@ import CoreData
 
 protocol ITodoListPresenter {
     func getTodos() -> Void
-    func saveTodo(withTitle title: String, withDescription description: String) -> Void
+    func saveTodo(withTitle title: String, withDescription description: String) -> Todo?
+    func removeTodo(_ todo: Todo) -> Void
+    func moveTodo(from position: Int, to destinationPosition: Int) -> Void
 }
 
 class TodoListPresenter: ITodoListPresenter {
@@ -36,7 +38,7 @@ class TodoListPresenter: ITodoListPresenter {
         }
     }
     
-    func saveTodo(withTitle title: String, withDescription description: String) -> Void {
+    func saveTodo(withTitle title: String, withDescription description: String) -> Todo? {
         do {
             let entity: Todo = Todo(context: self.privateContext)
             entity.createDate = NSDate()
@@ -44,8 +46,31 @@ class TodoListPresenter: ITodoListPresenter {
             entity.note = description
             entity.title = title
             try self.privateContext.save()
+            return entity
         } catch let error {
             fatalError(error.localizedDescription)
+        }
+    }
+    
+    func removeTodo(_ todo: Todo) -> Void {
+        do {
+            self.privateContext.delete(todo)
+            try self.privateContext.save()
+        } catch let error {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func moveTodo(from position: Int, to destinationPosition: Int) -> Void {
+        do {
+            let asyncRequest: NSAsynchronousFetchRequest = NSAsynchronousFetchRequest<Todo>(fetchRequest: Todo.fetchRequest()) { (result) in
+                var todos: [Todo] = result.finalResult ?? []
+                let itemToMove: Todo = todos[position]
+                itemToMove
+            }
+            try self.privateContext.execute(asyncRequest)
+        } catch let error {
+          fatalError(error.localizedDescription)
         }
     }
     

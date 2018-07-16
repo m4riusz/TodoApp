@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F413EB020FD162E00C79171 /* PersonBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F413EAF20FD162E00C79171 /* PersonBaseController.swift */; };
+		6F413EB220FD166500C79171 /* PersonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F413EB120FD166500C79171 /* PersonNavigationController.swift */; };
+		6F413EB520FD16A500C79171 /* PersonListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F413EB320FD16A500C79171 /* PersonListController.swift */; };
+		6F413EB620FD16A500C79171 /* PersonListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F413EB420FD16A500C79171 /* PersonListController.xib */; };
+		6F413EB820FD181C00C79171 /* PersonListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F413EB720FD181C00C79171 /* PersonListPresenter.swift */; };
 		6FA239D820FA69D100FDEEEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA239D720FA69D100FDEEEC /* AppDelegate.swift */; };
 		6FA239E020FA69D100FDEEEC /* TodoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FA239DE20FA69D100FDEEEC /* TodoApp.xcdatamodeld */; };
 		6FA239E220FA69D100FDEEEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FA239E120FA69D100FDEEEC /* Assets.xcassets */; };
@@ -29,6 +34,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F413EAF20FD162E00C79171 /* PersonBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonBaseController.swift; sourceTree = "<group>"; };
+		6F413EB120FD166500C79171 /* PersonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonNavigationController.swift; sourceTree = "<group>"; };
+		6F413EB320FD16A500C79171 /* PersonListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListController.swift; sourceTree = "<group>"; };
+		6F413EB420FD16A500C79171 /* PersonListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonListController.xib; sourceTree = "<group>"; };
+		6F413EB720FD181C00C79171 /* PersonListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListPresenter.swift; sourceTree = "<group>"; };
 		6FA239D420FA69D100FDEEEC /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA239D720FA69D100FDEEEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FA239DF20FA69D100FDEEEC /* TodoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoApp.xcdatamodel; sourceTree = "<group>"; };
@@ -63,6 +73,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F413EAD20FD15EE00C79171 /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				6F413EAE20FD160000C79171 /* List */,
+				6F413EAF20FD162E00C79171 /* PersonBaseController.swift */,
+				6F413EB120FD166500C79171 /* PersonNavigationController.swift */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
+		6F413EAE20FD160000C79171 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				6F413EB320FD16A500C79171 /* PersonListController.swift */,
+				6F413EB420FD16A500C79171 /* PersonListController.xib */,
+				6F413EB720FD181C00C79171 /* PersonListPresenter.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		6FA239CB20FA69D100FDEEEC = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +126,7 @@
 		6FA239EC20FA70E800FDEEEC /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				6F413EAD20FD15EE00C79171 /* Person */,
 				6FA239F220FA718E00FDEEEC /* Todo */,
 				6FA239ED20FA70FB00FDEEEC /* Base */,
 			);
@@ -220,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F413EB620FD16A500C79171 /* PersonListController.xib in Resources */,
 				6FA23A1C20FA856F00FDEEEC /* Launch Screen.storyboard in Resources */,
 				6FA239FD20FA72B000FDEEEC /* TodoListController.xib in Resources */,
 				6FA239E220FA69D100FDEEEC /* Assets.xcassets in Resources */,
@@ -239,13 +271,17 @@
 				6FA239EF20FA711600FDEEEC /* BaseScreenController.swift in Sources */,
 				6FA23A1320FA7C7200FDEEEC /* Todo+CoreDataClass.swift in Sources */,
 				6FA23A1920FA7D8600FDEEEC /* NSObject+Extension.swift in Sources */,
+				6F413EB520FD16A500C79171 /* PersonListController.swift in Sources */,
+				6F413EB820FD181C00C79171 /* PersonListPresenter.swift in Sources */,
 				6FA239F920FA726600FDEEEC /* TodoNavigationController.swift in Sources */,
 				6FA23A1420FA7C7200FDEEEC /* Todo+CoreDataProperties.swift in Sources */,
+				6F413EB220FD166500C79171 /* PersonNavigationController.swift in Sources */,
 				6FA23A1220FA7C7200FDEEEC /* Priority+CoreDataProperties.swift in Sources */,
 				6FA23A1120FA7C7200FDEEEC /* Priority+CoreDataClass.swift in Sources */,
 				6FA23A2020FA879A00FDEEEC /* TodoListConfigurator.swift in Sources */,
 				6FA239E020FA69D100FDEEEC /* TodoApp.xcdatamodeld in Sources */,
 				6FA23A1520FA7C7200FDEEEC /* Person+CoreDataClass.swift in Sources */,
+				6F413EB020FD162E00C79171 /* PersonBaseController.swift in Sources */,
 				6FA23A1E20FA860100FDEEEC /* TodoListPresenter.swift in Sources */,
 				6FA239F420FA720F00FDEEEC /* TodoBaseController.swift in Sources */,
 				6FA239D820FA69D100FDEEEC /* AppDelegate.swift in Sources */,
