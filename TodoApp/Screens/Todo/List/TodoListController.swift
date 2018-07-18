@@ -14,7 +14,7 @@ class TodoListController: TodoBaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         todoListConfigurator.configure(self)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className())
+        tableView.register(UINib(nibName: TodoListTableViewCell.className(), bundle: nil), forCellReuseIdentifier: TodoListTableViewCell.className())
         todoListPresenter.getTodos()
     }
     
@@ -66,6 +66,13 @@ extension TodoListController: ITodoListView {
     }
 }
 
+extension TodoListController: ITodoListTableViewCell {
+    
+    func todoListTableViewCell(_ cell: TodoListTableViewCell, didChangeStatus status: Int) {
+        self.todoListPresenter.update(todo: cell.todo!, withStatus: status)
+    }
+}
+
 extension TodoListController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,21 +80,18 @@ extension TodoListController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className(), for: indexPath)
-        cell.textLabel?.text = todos[indexPath.row].title
-        cell.detailTextLabel?.text = todos[indexPath.row].note
+        let cell: TodoListTableViewCell = tableView.dequeueReusableCell(withIdentifier: TodoListTableViewCell.className(), for: indexPath) as! TodoListTableViewCell
+        let selectedItem: Todo = todos[indexPath.row];
+        cell.titleLabel.text = selectedItem.title
+        cell.descriptionLabel.text = selectedItem.note
+        cell.todo = selectedItem
+        cell.statusSegmentControl.selectedSegmentIndex = Int(selectedItem.status?.status ?? 0)
+        cell.delegate = self
         return cell
     }
 }
 
 extension TodoListController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let rowToMove: Todo = self.todos[sourceIndexPath.row];
-        self.todos.remove(at: sourceIndexPath.row)
-        self.todos.insert(rowToMove, at: destinationIndexPath.row)
-        self.todoListPresenter.moveTodo(from: sourceIndexPath.row, to: destinationIndexPath.row)
-    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         guard todos.count > indexPath.row else {
