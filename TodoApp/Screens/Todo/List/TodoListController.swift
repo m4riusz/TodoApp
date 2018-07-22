@@ -34,28 +34,21 @@ class TodoListController: TodoBaseController {
     
     @objc
     fileprivate func onAddButton() -> Void {
-        let alertController: UIAlertController = UIAlertController(title: "Add", message: nil, preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Title"
-        }
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Notes"
-        }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            
-        }))
-        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
-            let title: String = alertController.textFields?.first?.text ?? "Title"
-            let description: String = alertController.textFields?.last?.text ?? ""
-            if let savedTodo: Todo = self.todoListPresenter.saveTodo(withTitle: title, withDescription: description) {
-                self.todos.insert(savedTodo, at: 0)
-                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-            }
-            
-        }))
-        self.navigationController?.present(alertController, animated: true, completion: nil)
+        let addController: TodoAddController = TodoAddController()
+        addController.delegate = self
+        self.navigationController?.present(TodoNavigationController(rootViewController: addController), animated: true, completion: nil)
     }
     
+}
+
+extension TodoListController: TodoAddControllerProtocol {
+    
+    func save(form: TodoAddControllerForm) {
+        if let todo: Todo = self.todoListPresenter.saveTodo(withPriority: form.priority, withStatus: form.status, withTitle: form.title, withDescription: form.description) {
+            self.todos.insert(todo, at: 0)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+        }
+    }
 }
 
 extension TodoListController: ITodoListView {
@@ -82,10 +75,7 @@ extension TodoListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TodoListTableViewCell = tableView.dequeueReusableCell(withIdentifier: TodoListTableViewCell.className(), for: indexPath) as! TodoListTableViewCell
         let selectedItem: Todo = todos[indexPath.row];
-        cell.titleLabel.text = selectedItem.title
-        cell.descriptionLabel.text = selectedItem.note
-        cell.todo = selectedItem
-        cell.statusSegmentControl.selectedSegmentIndex = Int(selectedItem.status?.status ?? 0)
+        cell.loadCellData(withTodo: selectedItem)
         cell.delegate = self
         return cell
     }

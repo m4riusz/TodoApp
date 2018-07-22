@@ -13,6 +13,14 @@ class TodoListTableViewCell: UITableViewCell {
     weak var delegate: ITodoListTableViewCell?
     var todo: Todo?
     
+    func loadCellData(withTodo todo: Todo) -> Void {
+        self.todo = todo
+        self.titleLabel.text = todo.title
+        self.descriptionLabel.text = todo.note
+        self.statusSegmentControl.selectedSegmentIndex = Int(todo.status)
+        self.priorityColor.backgroundColor = [UIColor.green, UIColor.yellow, UIColor.red][Int(todo.priority)]
+    }
+    
     // MARK - Actions
     
     @IBAction func onSegmentValueChanged(_ sender: Any) {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6F03742F20FFB93E000121A6 /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F03742D20FFB93E000121A6 /* TodoListTableViewCell.swift */; };
 		6F03743020FFB93E000121A6 /* TodoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F03742E20FFB93E000121A6 /* TodoListTableViewCell.xib */; };
+		6F22892A2104E39300BB5C4A /* TodoAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2289282104E39300BB5C4A /* TodoAddController.swift */; };
+		6F22892B2104E39300BB5C4A /* TodoAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2289292104E39300BB5C4A /* TodoAddController.xib */; };
 		6FA239D820FA69D100FDEEEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA239D720FA69D100FDEEEC /* AppDelegate.swift */; };
 		6FA239E020FA69D100FDEEEC /* TodoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FA239DE20FA69D100FDEEEC /* TodoApp.xcdatamodeld */; };
 		6FA239E220FA69D100FDEEEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FA239E120FA69D100FDEEEC /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		6F03742D20FFB93E000121A6 /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
 		6F03742E20FFB93E000121A6 /* TodoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListTableViewCell.xib; sourceTree = "<group>"; };
+		6F2289282104E39300BB5C4A /* TodoAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddController.swift; sourceTree = "<group>"; };
+		6F2289292104E39300BB5C4A /* TodoAddController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoAddController.xib; sourceTree = "<group>"; };
 		6FA239D420FA69D100FDEEEC /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA239D720FA69D100FDEEEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FA239DF20FA69D100FDEEEC /* TodoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoApp.xcdatamodel; sourceTree = "<group>"; };
@@ -55,6 +59,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F2289272104E36700BB5C4A /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				6F2289282104E39300BB5C4A /* TodoAddController.swift */,
+				6F2289292104E39300BB5C4A /* TodoAddController.xib */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
 		6FA239CB20FA69D100FDEEEC = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +119,7 @@
 		6FA239F220FA718E00FDEEEC /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				6FA239F620FA722D00FDEEEC /* Detail */,
+				6F2289272104E36700BB5C4A /* Add */,
 				6FA239F520FA722400FDEEEC /* List */,
 				6FA239F320FA720F00FDEEEC /* TodoBaseController.swift */,
 				6FA239F820FA726600FDEEEC /* TodoNavigationController.swift */,
@@ -125,13 +138,6 @@
 				6F03742E20FFB93E000121A6 /* TodoListTableViewCell.xib */,
 			);
 			path = List;
-			sourceTree = "<group>";
-		};
-		6FA239F620FA722D00FDEEEC /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Detail;
 			sourceTree = "<group>";
 		};
 		6FA23A1720FA7D3F00FDEEEC /* Common */ = {
@@ -201,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FA23A1C20FA856F00FDEEEC /* Launch Screen.storyboard in Resources */,
+				6F22892B2104E39300BB5C4A /* TodoAddController.xib in Resources */,
 				6F03743020FFB93E000121A6 /* TodoListTableViewCell.xib in Resources */,
 				6FA239FD20FA72B000FDEEEC /* TodoListController.xib in Resources */,
 				6FA239E220FA69D100FDEEEC /* Assets.xcassets in Resources */,
@@ -215,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FA239F120FA718300FDEEEC /* BaseScreenNavigationController.swift in Sources */,
+				6F22892A2104E39300BB5C4A /* TodoAddController.swift in Sources */,
 				6F03742F20FFB93E000121A6 /* TodoListTableViewCell.swift in Sources */,
 				6FA239FC20FA72B000FDEEEC /* TodoListController.swift in Sources */,
 				6FA239EF20FA711600FDEEEC /* BaseScreenController.swift in Sources */,

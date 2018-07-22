@@ -3,7 +3,7 @@ import CoreData
 
 protocol ITodoListPresenter {
     func getTodos() -> Void
-    func saveTodo(withTitle title: String, withDescription description: String) -> Todo?
+    func saveTodo(withPriority priority: Int, withStatus status: Int, withTitle title: String, withDescription description: String) -> Todo?
     func removeTodo(_ todo: Todo) -> Void
     func update(todo: Todo, withStatus status: Int) -> Void
 }
@@ -34,12 +34,14 @@ class TodoListPresenter: ITodoListPresenter {
         try! self.privateContext.execute(asyncRequest)
     }
     
-    func saveTodo(withTitle title: String, withDescription description: String) -> Todo? {
+    func saveTodo(withPriority priority: Int, withStatus status: Int, withTitle title: String, withDescription description: String) -> Todo? {
         let entity: Todo = Todo(context: self.privateContext)
         entity.createDate = Date()
         entity.modifyDate = Date()
         entity.note = description
         entity.title = title
+        entity.status = Int16(status)
+        entity.priority = Int16(priority)
         try! self.privateContext.save()
         return entity
     }
@@ -50,9 +52,7 @@ class TodoListPresenter: ITodoListPresenter {
     }
     
     func update(todo: Todo, withStatus status: Int) -> Void {
-        let statusEntity: Status = Status(context: self.privateContext)
-        statusEntity.status = Int16(status)
-        todo.status = statusEntity
+        todo.status = Int16(status)
         try! self.privateContext.save()
     }
 }
